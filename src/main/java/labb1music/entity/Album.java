@@ -51,7 +51,7 @@ public class Album {
         this.artist = artist;
     }
 
-    public LocalDate getReleaseDate() {
+    public @PastOrPresent(message = "Release date must be in the past or present") LocalDate getReleaseDate() {
         return releaseDate;
     }
 
