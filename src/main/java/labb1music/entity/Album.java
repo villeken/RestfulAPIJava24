@@ -22,7 +22,7 @@ public class Album {
     private LocalDate releaseDate;
 
     @Pattern(regexp = "^\\d{1,3}$", message = "Track count must be a valid number")
-    private String trackCount;
+    private Integer trackCount;
 
     @NotBlank(message = "Genre is required")
     private String genre;
@@ -59,11 +59,11 @@ public class Album {
         this.releaseDate = releaseDate;
     }
 
-    public String getTrackCount() {
+    public Integer getTrackCount() {
         return trackCount;
     }
 
-    public void setTrackCount(String trackCount) {
+    public void setTrackCount(Integer trackCount) {
         this.trackCount = trackCount;
     }
 
