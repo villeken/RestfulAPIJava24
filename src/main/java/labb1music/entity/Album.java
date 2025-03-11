@@ -18,8 +18,9 @@ public class Album {
     @NotBlank(message = "Artist is required")
     private String artist;
 
-    @PastOrPresent(message = "Release date must be in the past or present")
-    private LocalDate releaseDate;
+    @Min(value = 1900, message = "Release year must be after 1900") // Adjust as needed
+    @Max(value = 2100, message = "Release year must be valid") // Future proofing
+    private Integer releaseYear;
 
     @Pattern(regexp = "^\\d{1,3}$", message = "Track count must be a valid number")
     private Integer trackCount;
@@ -51,12 +52,12 @@ public class Album {
         this.artist = artist;
     }
 
-    public @PastOrPresent(message = "Release date must be in the past or present") LocalDate getReleaseDate() {
-        return releaseDate;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public Integer getTrackCount() {
