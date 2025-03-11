@@ -95,7 +95,7 @@ public class Album {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
-                ", releaseDate=" + releaseDate +
+                ", releaseDate=" + releaseYear +
                 ", trackCount='" + trackCount + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';
