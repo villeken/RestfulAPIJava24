@@ -21,7 +21,8 @@ public class Album {
     @Max(value = 2100, message = "Release year must be valid") // Future proofing
     private Integer releaseYear;
 
-    @Pattern(regexp = "^\\d{1,3}$", message = "Track count must be a valid number")
+    @Min(value = 1, message = "Track count must be at least 1")
+    @Max(value = 500, message = "Track count must be reasonable")
     private Integer trackCount;
 
     @NotBlank(message = "Genre is required")
@@ -94,7 +95,7 @@ public class Album {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
-                ", releaseDate=" + releaseYear +
+                ", releaseYear=" + releaseYear +
                 ", trackCount='" + trackCount + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';

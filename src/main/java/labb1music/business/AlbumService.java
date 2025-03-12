@@ -19,8 +19,8 @@ public class AlbumService {
     private AlbumRepository repository;
 
     @Inject
-    public AlbumService(AlbumRepository bookRepository) {
-        this.repository = bookRepository;
+    public AlbumService(AlbumRepository albumRepository) {
+        this.repository = albumRepository;
 
     }
 
