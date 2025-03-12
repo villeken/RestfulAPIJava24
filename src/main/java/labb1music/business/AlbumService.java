@@ -1,7 +1,8 @@
-package labb1music;
+package labb1music.business;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import labb1music.AlbumRepository;
 import labb1music.dto.AlbumResponse;
 
 

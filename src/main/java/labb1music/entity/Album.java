@@ -3,7 +3,6 @@ package labb1music.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
