@@ -25,8 +25,7 @@ public class AlbumService {
 
     }
 
-    public AlbumService() {
-    }
+    public AlbumService() {}
 
     public List<AlbumResponse> getAllAlbums() {
         return repository.findAll()
