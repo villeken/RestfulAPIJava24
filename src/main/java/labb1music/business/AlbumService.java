@@ -2,6 +2,8 @@ package labb1music.business;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import labb1music.AlbumRepository;
 import labb1music.dto.AlbumResponse;
 import labb1music.dto.CreateAlbum;
@@ -25,17 +27,22 @@ public class AlbumService {
 
     }
 
-    public AlbumService() {}
-
-    public List<AlbumResponse> getAllAlbums() {
-        return repository.findAll()
-                .map(AlbumResponse::new)
-                .filter(Objects::nonNull)
-                .toList();
-
+    public AlbumService() {
     }
 
-    public AlbumResponse getBookById(Long id) {
+    @PersistenceContext
+    private EntityManager em;
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.em = entityManager;
+    }
+
+    public List<Album> getAllAlbums() {
+        return em.createQuery("SELECT a FROM Album a", Album.class)
+                .getResultList();
+    }
+
+    public AlbumResponse getAlbumById(Long id) {
         return repository.findById(id)
                 .map(AlbumResponse::new)
                 .orElseThrow(

@@ -1,11 +1,23 @@
 package labb1music.dto;
 
+import jakarta.validation.constraints.Negative;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import labb1music.entity.Album;
 
-public record AlbumResponse(Long id, String title, String artist, String genre, Integer trackCount, Integer releaseYear) {
+public record AlbumResponse(@NotNull @Negative Long id,
+                            @NotBlank String title,
+                            @NotBlank String artist,
+                            @NotBlank String genre,
+                            @NotNull Integer trackCount,
+                            @NotNull  Integer releaseYear) {
 
-    public AlbumResponse(Album album){
+    public AlbumResponse(Album album) {
         this(album.getId(), album.getTitle(), album.getArtist(), album.getGenre(), album.getTrackCount(), album.getReleaseYear());
+    }
+
+    public static AlbumResponse map(Album album) {
+        return new AlbumResponse(album.getId(), album.getTitle(), album.getArtist(), album.getGenre(), album.getTrackCount(), album.getReleaseYear());
     }
 
 }

@@ -1,5 +1,7 @@
 package labb1music;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import labb1music.business.AlbumService;
 import labb1music.dto.AlbumResponse;
 import labb1music.dto.CreateAlbum;
@@ -15,7 +17,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -25,47 +26,54 @@ class AlbumServiceTest {
     @Mock
     private AlbumRepository repository;
 
+    @Mock
+    private EntityManager entityManager;
+
+    @Mock
+    private TypedQuery<Album> query;
+
     @InjectMocks
     private AlbumService albumService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        albumService.setEntityManager(entityManager);
     }
 
     @Test
     void testGetAllAlbums() {
-
         Album album = new Album();
         album.setId(1L);
         album.setTitle("Test Album");
 
-        when(repository.findAll()).thenReturn(Stream.of(album));
+        when(entityManager.createQuery(anyString(), eq(Album.class))).thenReturn(query);
+        when(query.getResultList()).thenReturn(List.of(album));
 
-        List<AlbumResponse> albums = albumService.getAllAlbums();
+        List<Album> albums = albumService.getAllAlbums();
 
         assertNotNull(albums);
         assertEquals(1, albums.size());
-        assertEquals("Test Album", albums.getFirst().title());
+        assertEquals("Test Album", albums.get(0).getTitle());
     }
 
     @Test
-    void testGetBookById() {
+    void testGetAlbumById() {
         Album album = new Album();
         album.setId(1L);
         when(repository.findById(1L)).thenReturn(Optional.of(album));
 
-        AlbumResponse response = albumService.getBookById(1L);
+        AlbumResponse response = albumService.getAlbumById(1L);
 
         assertNotNull(response);
         assertEquals(1L, response.id());
     }
 
     @Test
-    void testGetBookByIdNotFound() {
+    void testGetAlbumByIdNotFound() {
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(NotFound.class, () -> albumService.getBookById(1L));
+        assertThrows(NotFound.class, () -> albumService.getAlbumById(1L));
     }
 
     @Test
