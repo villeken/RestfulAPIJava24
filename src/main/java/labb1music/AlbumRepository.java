@@ -16,8 +16,8 @@ public interface AlbumRepository extends CrudRepository<Album, Long> {
 
     List<Album> findByTitleContainingIgnoreCase(String title);
 
-    List<Album> findByReleaseDateAfter(Date releaseDate);
+    List<Album> findByReleaseYearAfter(Integer releaseYear);
 
-    List<Album> findByReleaseDateBefore(Date releaseDate);
+    List<Album> findByReleaseYearBefore(Integer releaseYear);
 }
 
