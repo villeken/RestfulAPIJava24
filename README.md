@@ -35,4 +35,6 @@ The application is packaged as a WAR file and deployed on a WildFly server. The 
 4. - Start the database and server with:
    - docker-compose --profile production up
 
+The application will be accessible at http://localhost:8080/albums
+
 
