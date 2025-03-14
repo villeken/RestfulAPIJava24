@@ -11,6 +11,7 @@ import labb1music.exceptions.NotFound;
 import labb1music.mapper.AlbumMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class AlbumService {
@@ -23,7 +24,7 @@ public class AlbumService {
     }
 
     public List<Album> getAllAlbums() {
-        return repository.findAll().toList();
+        return repository.findAll().collect(Collectors.toList());
     }
 
     public AlbumResponse getAlbumById(Long id) {
