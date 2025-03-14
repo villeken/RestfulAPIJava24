@@ -2,8 +2,7 @@ package labb1music.business;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.validation.constraints.Positive;
-import labb1music.AlbumRepository;
+import labb1music.repository.AlbumRepository;
 import labb1music.dto.AlbumResponse;
 import labb1music.dto.CreateAlbum;
 import labb1music.dto.UpdateAlbum;

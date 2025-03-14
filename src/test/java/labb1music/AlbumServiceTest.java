@@ -9,6 +9,7 @@ import labb1music.dto.UpdateAlbum;
 import labb1music.entity.Album;
 import labb1music.exceptions.NotFound;
 import labb1music.mapper.AlbumMapper;
+import labb1music.repository.AlbumRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
