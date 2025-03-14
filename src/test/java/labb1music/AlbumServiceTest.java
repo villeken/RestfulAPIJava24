@@ -38,7 +38,6 @@ class AlbumServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        albumService.setEntityManager(entityManager);
     }
 
     @Test
