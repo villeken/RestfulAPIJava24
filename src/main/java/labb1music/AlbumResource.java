@@ -19,7 +19,7 @@ import java.util.List;
 
 import static jakarta.ws.rs.core.Response.Status.CREATED;
 
-@Path("albums")
+@Path("/albums")
 @Log
 public class AlbumResource {
 
