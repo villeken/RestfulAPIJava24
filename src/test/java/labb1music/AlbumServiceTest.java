@@ -116,4 +116,28 @@ class AlbumServiceTest {
 
         assertThrows(NotFound.class, () -> albumService.updateAlbum(1L, updateAlbum));
     }
+
+
+    @Test
+    public void test_delete_album_when_exists() {
+
+        Long albumId = 1L;
+        Album album = new Album();
+        album.setId(albumId);
+        album.setTitle("Test Album");
+        album.setArtist("Test Artist");
+        album.setGenre("Rock");
+        album.setReleaseYear(2020);
+        album.setTrackCount(10);
+
+        AlbumRepository mockRepository = Mockito.mock(AlbumRepository.class);
+        Mockito.when(mockRepository.findById(albumId)).thenReturn(Optional.of(album));
+
+        AlbumService albumService = new AlbumService(mockRepository);
+
+        albumService.deleteAlbum(albumId);
+
+        Mockito.verify(mockRepository).findById(albumId);
+        Mockito.verify(mockRepository).delete(album);
+    }
 }
