@@ -1,4 +1,16 @@
 package labb1music;
 
-public class AlbumMapperTest {
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class AlbumMapperTest {
+
+    @Test
+    void map() {
+    }
+
+    @Test
+    void testMap() {
+    }
 }
