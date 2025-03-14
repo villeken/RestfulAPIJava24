@@ -2,6 +2,7 @@ package labb1music.business;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.constraints.Positive;
 import labb1music.AlbumRepository;
 import labb1music.dto.AlbumResponse;
 import labb1music.dto.CreateAlbum;
@@ -51,5 +52,10 @@ public class AlbumService {
         if (album.releaseYear() != 0)
             oldAlbum.setReleaseYear(album.releaseYear());
         repository.save(oldAlbum);
+    }
+
+    public void deleteAlbum(Long id) {
+        Album album = repository.findById(id).orElseThrow(() -> new NotFound("Album with id " + id + " not found!"));
+        repository.delete(album);
     }
 }
