@@ -23,11 +23,14 @@ import static jakarta.ws.rs.core.Response.Status.CREATED;
 @Log
 public class AlbumResource {
 
-    private final AlbumService albumService;
+    private AlbumService albumService;
 
     @Inject
     public AlbumResource(AlbumService albumService) {
         this.albumService = albumService;
+    }
+
+    public AlbumResource() {
     }
 
     @GET

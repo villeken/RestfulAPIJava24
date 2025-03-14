@@ -13,10 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -41,19 +43,25 @@ class AlbumServiceTest {
     }
 
     @Test
-    void testGetAllAlbums() {
-        Album album = new Album();
-        album.setId(1L);
-        album.setTitle("Test Album");
+    public void testGetAllAlbumsAndReturnList() {
 
-        when(entityManager.createQuery(anyString(), eq(Album.class))).thenReturn(query);
-        when(query.getResultList()).thenReturn(List.of(album));
+        AlbumRepository mockRepository = Mockito.mock(AlbumRepository.class);
 
-        List<Album> albums = albumService.getAllAlbums();
+        List<Album> expectedAlbums = List.of(
+                new Album(),
+                new Album()
+        );
 
-        assertNotNull(albums);
-        assertEquals(1, albums.size());
-        assertEquals("Test Album", albums.get(0).getTitle());
+        Stream<Album> albumStream = expectedAlbums.stream();
+        Mockito.when(mockRepository.findAll()).thenReturn(albumStream);
+
+        AlbumService albumService = new AlbumService(mockRepository);
+
+        List<Album> result = albumService.getAllAlbums();
+
+        assertEquals(2, result.size());
+        assertEquals(expectedAlbums, result);
+        Mockito.verify(mockRepository).findAll();
     }
 
     @Test

@@ -17,11 +17,15 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class AlbumService {
 
-    private final AlbumRepository repository;
+    private AlbumRepository repository;
 
     @Inject
-    public AlbumService(AlbumRepository albumRepository) {
-        this.repository = albumRepository;
+    public AlbumService(AlbumRepository repository) {
+        this.repository = repository;
+    }
+
+    public AlbumService() {
+
     }
 
     public List<Album> getAllAlbums() {
